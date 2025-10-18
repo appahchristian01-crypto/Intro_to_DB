@@ -1,18 +1,14 @@
 -- task_4.sql
--- Print the full description of the 'books' table in alx_book_store
--- WITHOUT using DESCRIBE, EXPLAIN, or ANALYZE
+-- Script to print the full description of the 'books' table
+-- from the specified database without using DESCRIBE or EXPLAIN
 
-USE alx_book_store;
-
-SELECT
-  COLUMN_NAME,
-  COLUMN_TYPE,
-  IS_NULLABLE,
-  COLUMN_KEY,
-  COLUMN_DEFAULT,
-  EXTRA
-FROM
-  INFORMATION_SCHEMA.COLUMNS
-WHERE
-  TABLE_SCHEMA = 'alx_book_store'
-  AND LOWER(TABLE_NAME) = 'books';
+SELECT 
+    COLUMN_NAME AS 'Column',
+    COLUMN_TYPE AS 'Type',
+    IS_NULLABLE AS 'Nullable',
+    COLUMN_KEY AS 'Key',
+    COLUMN_DEFAULT AS 'Default',
+    EXTRA AS 'Extra'
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_SCHEMA = DATABASE()
+  AND TABLE_NAME = 'books';
