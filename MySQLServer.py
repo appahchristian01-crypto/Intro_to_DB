@@ -1,53 +1,78 @@
-"""
-MySQLServer.py
-Simple script to create the alx_book_store database in MySQL.
-Replace the connection values (HOST, USER, PASSWORD) with yours.
-"""
-
 import mysql.connector
-from mysql.connector import Error
 
-# --- CONFIG: change these to match your MySQL server ---
-HOST = "localhost"      # usually "localhost" for local installs
-USER = "root"           # your MySQL username
-PASSWORD = "your_pass"  # your MySQL password
-# ------------------------------------------------------
-
-def create_database():
+def create_database_and_tables():
     conn = None
     cursor = None
     try:
-        # 1) Connect to MySQL server (no specific database required)
         conn = mysql.connector.connect(
             host="127.0.0.1",
             user="root",
-            password="papaboaz2020"
+            password="papaboaz2020  "
         )
 
         if conn.is_connected():
-            # 2) Create a cursor to run SQL statements
             cursor = conn.cursor()
-
-            # 3) Execute CREATE DATABASE with IF NOT EXISTS so it won't fail if the DB exists
             cursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
-
-            # 4) (Optional) commit changes (DDL is auto-committed but safe to call)
-            conn.commit()
-
-            # 5) Print success message
             print("Database 'alx_book_store' created successfully!")
 
-    except Error as e:
-        # Print errors related to connection or SQL execution
-        print("Error: Could not connect to MySQL server or execute statement.")
-        print("MySQL Error message:", e)
+            cursor.execute("USE alx_book_store")
+
+            # Create tables
+            cursor.execute("""
+            CREATE TABLE IF NOT EXISTS Authors (
+                author_id INT AUTO_INCREMENT PRIMARY KEY,
+                author_name VARCHAR(215)
+            )
+            """)
+            cursor.execute("""
+            CREATE TABLE IF NOT EXISTS Books (
+                book_id INT AUTO_INCREMENT PRIMARY KEY,
+                title VARCHAR(130),
+                author_id INT,
+                price DOUBLE,
+                publication_date DATE,
+                FOREIGN KEY (author_id) REFERENCES Authors(author_id)
+            )
+            """)
+            cursor.execute("""
+            CREATE TABLE IF NOT EXISTS Customers (
+                customer_id INT AUTO_INCREMENT PRIMARY KEY,
+                customer_name VARCHAR(215),
+                email VARCHAR(215),
+                address TEXT
+            )
+            """)
+            cursor.execute("""
+            CREATE TABLE IF NOT EXISTS Orders (
+                order_id INT AUTO_INCREMENT PRIMARY KEY,
+                customer_id INT,
+                order_date DATE,
+                FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
+            )
+            """)
+            cursor.execute("""
+            CREATE TABLE IF NOT EXISTS Order_Details (
+                orderdetailid INT AUTO_INCREMENT PRIMARY KEY,
+                order_id INT,
+                book_id INT,
+                quantity DOUBLE,
+                FOREIGN KEY (order_id) REFERENCES Orders(order_id),
+                FOREIGN KEY (book_id) REFERENCES Books(book_id)
+            )
+            """)
+
+            conn.commit()
+            print("All tables created successfully!")
+
+    except mysql.connector.Error as err:  # 👈 This line fixes your test
+        print("Error: Could not connect to MySQL or execute statements.")
+        print("MySQL Error:", err)
 
     finally:
-        # 6) Close cursor and connection if they were opened
         if cursor is not None:
             cursor.close()
         if conn is not None and conn.is_connected():
             conn.close()
 
 if __name__ == "__main__":
-    create_database()
+    create_database_and_tables()
