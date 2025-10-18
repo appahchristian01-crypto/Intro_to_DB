@@ -1,7 +1,6 @@
 -- Display full description of the 'books' table
--- from the 'alx_book_store' database without using DESCRIBE or EXPLAIN
-
-USE alx_book_store;
+-- from a database passed as an argument to the mysql command
+-- without using DESCRIBE or EXPLAIN
 
 SELECT 
     COLUMN_NAME AS 'Column',
@@ -11,6 +10,6 @@ SELECT
     COLUMN_KEY AS 'Key',
     EXTRA AS 'Extra'
 FROM INFORMATION_SCHEMA.COLUMNS
-WHERE TABLE_SCHEMA = 'alx_book_store'
+WHERE TABLE_SCHEMA = DATABASE()
   AND TABLE_NAME = 'books'
 ORDER BY ORDINAL_POSITION;
