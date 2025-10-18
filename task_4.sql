@@ -1,5 +1,6 @@
--- Display full description of the 'books' table
--- from the current database without using DESCRIBE or EXPLAIN
+-- This script displays the full description of the 'books' table
+-- without using DESCRIBE or EXPLAIN
+-- It works for any database passed as an argument
 
 SELECT 
     COLUMN_NAME AS 'Column',
