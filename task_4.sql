@@ -1,6 +1,6 @@
 -- task_4.sql
--- This script prints the full description of the 'books' table
--- without using DESCRIBE or EXPLAIN
+-- Print the full description of the 'Books' table in alx_book_store
+-- without using DESCRIBE, EXPLAIN, or ANALYZE
 
 USE alx_book_store;
 
