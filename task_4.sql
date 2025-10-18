@@ -1,14 +1,15 @@
 -- task_4.sql
--- Script to print the full description of the 'books' table
--- from the specified database without using DESCRIBE or EXPLAIN
+-- Script that prints the full description of the table books
+-- from the database passed as an argument of the mysql command
+-- without using DESCRIBE or EXPLAIN
 
 SELECT 
-    COLUMN_NAME AS 'Column',
-    COLUMN_TYPE AS 'Type',
-    IS_NULLABLE AS 'Nullable',
-    COLUMN_KEY AS 'Key',
-    COLUMN_DEFAULT AS 'Default',
-    EXTRA AS 'Extra'
+    COLUMN_NAME,
+    COLUMN_TYPE,
+    IS_NULLABLE,
+    COLUMN_KEY,
+    COLUMN_DEFAULT,
+    EXTRA
 FROM INFORMATION_SCHEMA.COLUMNS
 WHERE TABLE_SCHEMA = DATABASE()
   AND TABLE_NAME = 'books';
