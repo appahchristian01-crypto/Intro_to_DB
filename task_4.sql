@@ -1,6 +1,6 @@
 -- task_4.sql
--- This script will show a full description of the 'books' table
--- Note: the word "describe" appears below as plain text (not as the DESCRIBE command)
+-- Print the full description of the 'books' table in alx_book_store
+-- WITHOUT using DESCRIBE, EXPLAIN, or ANALYZE
 
 USE alx_book_store;
 
@@ -10,8 +10,7 @@ SELECT
   IS_NULLABLE,
   COLUMN_KEY,
   COLUMN_DEFAULT,
-  EXTRA,
-  'describe' AS description_note
+  EXTRA
 FROM
   INFORMATION_SCHEMA.COLUMNS
 WHERE
