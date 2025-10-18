@@ -1,5 +1,5 @@
 -- task_4.sql
--- Display full description of the 'Books' table from alx_book_store database
+-- Print the full description of the 'Books' table in alx_book_store
 -- without using DESCRIBE, EXPLAIN, or ANALYZE
 
 USE alx_book_store;
