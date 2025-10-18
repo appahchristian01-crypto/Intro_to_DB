@@ -1,9 +1,9 @@
+cat > task_4.sql <<'SQL'
 -- task_4.sql
--- Script that prints the full description of the table books
--- from the database passed as an argument of the mysql command
--- without using DESCRIBE or EXPLAIN
+-- Print the full description of the table books from the alx_book_store database
+-- Do NOT use DESCRIBE, EXPLAIN, or ANALYZE
 
-SELECT 
+SELECT
     COLUMN_NAME,
     COLUMN_TYPE,
     IS_NULLABLE,
@@ -13,3 +13,4 @@ SELECT
 FROM INFORMATION_SCHEMA.COLUMNS
 WHERE TABLE_SCHEMA = 'alx_book_store'
   AND TABLE_NAME = 'books';
+SQL
