@@ -1,6 +1,8 @@
--- This script displays the full description of the 'books' table
+-- This script prints the full description of the 'books' table
+-- from the 'alx_book_store' database
 -- without using DESCRIBE or EXPLAIN
--- It works for any database passed as an argument
+
+USE alx_book_store;
 
 SELECT 
     COLUMN_NAME AS 'Column',
@@ -10,6 +12,6 @@ SELECT
     COLUMN_KEY AS 'Key',
     EXTRA AS 'Extra'
 FROM INFORMATION_SCHEMA.COLUMNS
-WHERE TABLE_SCHEMA = DATABASE()
+WHERE TABLE_SCHEMA = 'alx_book_store'
   AND TABLE_NAME = 'books'
 ORDER BY ORDINAL_POSITION;
