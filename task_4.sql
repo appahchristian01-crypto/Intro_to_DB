@@ -1,6 +1,5 @@
 -- Display full description of the 'books' table
--- from a database passed as an argument to the mysql command
--- without using DESCRIBE or EXPLAIN
+-- from the current database without using DESCRIBE or EXPLAIN
 
 SELECT 
     COLUMN_NAME AS 'Column',
